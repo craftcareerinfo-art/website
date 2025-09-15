@@ -1,259 +1,730 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Craft Career</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Craft Career - Connecting India's Top Talent</title>
+<style>
+  /* Luxury Colors */
+  :root {
+    --luxury-gold: #D4AF37;
+    --luxury-gold-light: #E5C456;
+    --luxury-gold-dark: #B8860B;
+    --luxury-navy: #1a365d;
+    --luxury-navy-light: #2c5282;
+    --luxury-charcoal: #2D3748;
+    --luxury-cream: #FFFEF7;
+    --luxury-white: #FFFFFF;
+    --luxury-gray: #718096;
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background: #f9fafc;
-      overflow-x: hidden;
-    }
+    /* Typography */
+    --font-luxury: 'Playfair Display', serif;
+    --font-modern: 'Inter', sans-serif;
+    
+    /* Shadows */
+    --shadow-luxury: 0 10px 30px rgba(26, 54, 93, 0.1);
+    --shadow-gold: 0 5px 15px rgba(212, 175, 55, 0.2);
+    --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.05);
 
-    header {
-      background: linear-gradient(135deg, #f9d423, #64e38f);
-      color: #fff;
-      padding: 5rem 1rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      animation: gradientShift 8s ease infinite alternate;
-    }
+    /* Transitions */
+    --transition-smooth: all 0.3s ease;
+  }
 
-    @keyframes gradientShift {
-      from { background: linear-gradient(135deg, #f9d423, #64e38f); }
-      to { background: linear-gradient(135deg, #ffe259, #6dd5ed); }
-    }
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    header h1 {
-      font-size: 3rem;
-      animation: fadeInDown 1s ease forwards;
-    }
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
 
-    header p {
-      margin-top: 1rem;
-      font-size: 1.4rem;
-      animation: fadeInUp 1.2s ease forwards;
-    }
+  body {
+    font-family: var(--font-modern);
+    line-height: 1.6;
+    color: var(--luxury-charcoal);
+    background-color: var(--luxury-cream);
+    overflow-x: hidden;
+  }
 
-    @keyframes fadeInDown {
-      from {opacity: 0; transform: translateY(-30px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
 
-    @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(30px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
+  /* Header */
+  header.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    transition: var(--transition-smooth);
+  }
 
-    nav {
+  header.header.scrolled {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .navbar {
+    padding: 1rem 0;
+  }
+
+  .nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo-image {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--luxury-gold) 0%, var(--luxury-gold-dark) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-gold);
+    transition: var(--transition-smooth);
+    color: var(--luxury-white);
+    font-family: var(--font-luxury);
+    font-weight: 700;
+    font-size: 1.2rem;
+    user-select: none;
+  }
+
+  .logo-image:hover {
+    transform: scale(1.05);
+  }
+
+  .logo-text {
+    font-family: var(--font-luxury);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--luxury-navy);
+    user-select: none;
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    color: var(--luxury-charcoal);
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    transition: var(--transition-smooth);
+    padding: 0.5rem 0;
+    cursor: pointer;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--luxury-gold);
+    transition: var(--transition-smooth);
+  }
+
+  .nav-link:hover {
+    color: var(--luxury-gold-dark);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Mobile Menu Toggle */
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+  }
+
+  .mobile-menu-toggle span {
+    width: 25px;
+    height: 2px;
+    background: var(--luxury-navy);
+    transition: var(--transition-smooth);
+    border-radius: 1px;
+  }
+
+  /* Show mobile menu toggle on smaller screens */
+  @media (max-width: 768px) {
+    .mobile-menu-toggle {
       display: flex;
-      justify-content: center;
-      background: #fff;
-      padding: 1rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      animation: fadeInDown 1s ease forwards;
     }
 
-    nav a {
-      margin: 0 1rem;
-      text-decoration: none;
-      color: #333;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #64e38f;
-    }
-
-    section {
-      padding: 5rem 2rem;
-      max-width: 1200px;
-      margin: auto;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1s ease, transform 1s ease;
-    }
-
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    section img {
-      max-width: 100%;
-      border-radius: 1rem;
-      margin: 2rem 0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 1rem;
-      padding: 2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.4s, box-shadow 0.4s;
-      animation: fadeInUp 1s ease forwards;
-    }
-
-    .card img {
+    .nav-menu {
+      position: fixed;
+      top: 70px;
+      left: -100%;
       width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 0.8rem;
-      margin-bottom: 1rem;
+      height: calc(100vh - 70px);
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 2rem;
+      transition: var(--transition-smooth);
+      z-index: 999;
     }
 
-    .card:hover {
-      transform: translateY(-12px) scale(1.02);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    .nav-menu.active {
+      left: 0;
     }
 
-    .card h3 {
-      margin-bottom: 1rem;
-      color: #f9b233;
+    .nav-list {
+      flex-direction: column;
+      gap: 2rem;
     }
+  }
 
-    .cta {
-      text-align: center;
-      margin-top: 2rem;
-    }
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 1rem;
+    text-align: center;
+  }
 
-    .cta a {
-      background: linear-gradient(135deg, #f9d423, #64e38f);
-      color: #fff;
-      padding: 1rem 2rem;
-      border-radius: 2rem;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s, transform 0.3s;
-      display: inline-block;
-    }
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    overflow: hidden;
+  }
 
-    .cta a:hover {
-      background: linear-gradient(135deg, #64e38f, #f9d423);
-      transform: scale(1.05);
-    }
+  .hero-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.4) contrast(1.2);
+    transition: transform 0.3s ease;
+  }
 
-    footer {
-      background: #333;
-      color: #fff;
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 2rem;
-    }
+  .hero-background img:hover {
+    transform: scale(1.05);
+  }
 
-    footer p {
-      margin: 0.5rem 0;
-    }
-  </style>
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(26, 54, 93, 0.8) 0%, rgba(212, 175, 55, 0.1) 100%);
+    z-index: -1;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    padding: 2rem;
+    color: var(--luxury-white);
+  }
+
+  .hero-title {
+    font-family: var(--font-luxury);
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(135deg, #fff 0%, var(--luxury-gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-modern);
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--luxury-gold) 0%, var(--luxury-gold-dark) 100%);
+    color: var(--luxury-white);
+    box-shadow: var(--shadow-gold);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--luxury-white);
+    border: 2px solid var(--luxury-gold);
+  }
+
+  .btn-secondary:hover {
+    background: var(--luxury-gold);
+    transform: translateY(-2px);
+  }
+
+  /* About Section */
+  section#about {
+    padding: 6rem 0;
+    background: var(--luxury-white);
+  }
+
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-text h2 {
+    font-family: var(--font-luxury);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 600;
+    color: var(--luxury-navy);
+    margin-bottom: 2rem;
+  }
+
+  .about-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--luxury-gray);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-image {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-luxury);
+    transition: var(--transition-smooth);
+  }
+
+  .about-image:hover {
+    transform: translateY(-5px);
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+  }
+
+  /* Services Section */
+  section#services {
+    padding: 6rem 0;
+    background: var(--luxury-cream);
+  }
+
+  .section-title {
+    font-family: var(--font-luxury);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 600;
+    color: var(--luxury-navy);
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--luxury-gold);
+    margin: 1rem auto;
+    border-radius: 2px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .service-card {
+    background: var(--luxury-white);
+    padding: 2.5rem 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: var(--shadow-subtle);
+    transition: var(--transition-smooth);
+    border-top: 3px solid var(--luxury-gold);
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-luxury);
+  }
+
+  .service-card h3 {
+    font-family: var(--font-luxury);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--luxury-navy);
+    margin-bottom: 1rem;
+  }
+
+  .service-card p {
+    color: var(--luxury-gray);
+    line-height: 1.6;
+  }
+
+  /* Why Choose Us Section */
+  section#why-us {
+    padding: 6rem 0;
+    background: var(--luxury-white);
+  }
+
+  .why-us-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .why-us-image {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-luxury);
+  }
+
+  .why-us-image img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+  }
+
+  .why-us-text h2 {
+    font-family: var(--font-luxury);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 600;
+    color: var(--luxury-navy);
+    margin-bottom: 2rem;
+  }
+
+  .why-us-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--luxury-gray);
+    margin-bottom: 2rem;
+  }
+
+  .benefits-list {
+    list-style: none;
+    margin: 2rem 0;
+  }
+
+  .benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .benefits-list li::before {
+    content: '✓';
+    color: var(--luxury-gold);
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-right: 1rem;
+    margin-top: 0.1rem;
+  }
+
+  /* Contact Section */
+  section#contact {
+    padding: 6rem 0;
+    background: var(--luxury-cream);
+    text-align: center;
+  }
+
+  #contact h2 {
+    font-family: var(--font-luxury);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 600;
+    color: var(--luxury-navy);
+    margin-bottom: 2rem;
+  }
+
+  #contact p {
+    font-size: 1.1rem;
+    color: var(--luxury-gray);
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 2rem;
+    background: var(--luxury-white);
+    border-radius: 10px;
+    box-shadow: var(--shadow-subtle);
+    transition: var(--transition-smooth);
+    text-decoration: none;
+    color: var(--luxury-charcoal);
+  }
+
+  .contact-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-luxury);
+  }
+
+  .contact-icon {
+    width: 20px;
+    height: 20px;
+    background: var(--luxury-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--luxury-white);
+    font-size: 0.8rem;
+  }
+
+  /* Footer */
+  footer.footer {
+    background: var(--luxury-navy);
+    color: var(--luxury-white);
+    padding: 2.5rem 0 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  footer.footer p {
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header>
-    <h1>Welcome to Craft Career</h1>
-    <p>Your journey to a brighter career starts here</p>
-  </header>
-
-  <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#why">Why Us</a>
-    <a href="#contact">Contact</a>
+<header class="header" id="header">
+  <nav class="navbar">
+    <div class="container nav-content">
+      <div class="logo-container">
+        <div class="logo-image" aria-label="Craft Career Logo" role="img">CC</div>
+        <h2 class="logo-text">Craft Career</h2>
+      </div>
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+          <li class="nav-item"><a href="#why-us" class="nav-link">Why Us</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+      <div class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
   </nav>
+</header>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p>At Craft Career, we empower individuals and organizations to thrive. Our recruitment expertise ensures that top talent meets the right opportunities. We focus not only on filling roles but also on building lasting partnerships for growth.</p>
-    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80" alt="Team collaborating in an office">
-  </section>
-
-  <section id="services">
-    <h2>Our Services</h2>
-    <p>We offer a wide range of tailored services to help businesses grow and professionals succeed.</p>
-    <div class="cards">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80" alt="Career counseling session">
-        <h3>Career Counseling</h3>
-        <p>Personalized guidance from seasoned experts to align your skills with your dream job.</p>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Skill development workshop">
-        <h3>Skill Development</h3>
-        <p>Workshops and training programs to enhance your technical, creative, and leadership skills.</p>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=800&q=80" alt="Job interview in progress">
-        <h3>Job Placement</h3>
-        <p>We bridge the gap between employers and candidates, ensuring the right cultural and technical fit.</p>
-      </div>
+<section class="hero" id="home" aria-label="Hero section">
+  <div class="hero-background" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Professional business team collaborating in modern office" />
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Craft Career</h1>
+    <p class="hero-subtitle">Connecting India's top talent with leading organizations across industries. Your trusted partner for recruitment, staffing, and career growth.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn btn-primary" role="button" tabindex="0">Get in Touch</a>
+      <a href="#services" class="btn btn-secondary" role="button" tabindex="0">Our Services</a>
     </div>
-    <div class="cta">
-      <a href="#contact">Get Started</a>
+  </div>
+</section>
+
+<section id="about" aria-label="About Craft Career">
+  <div class="container about-content">
+    <div class="about-text">
+      <h2>About Us</h2>
+      <p>Craft Career is one of India's emerging recruitment service providers, committed to empowering businesses with skilled manpower and helping professionals unlock their true career potential.</p>
+      <p>From startups to established enterprises, we understand the unique workforce needs of the Indian market. Our team specializes in identifying talent across diverse industries—IT, manufacturing, healthcare, education, BFSI, retail, logistics, and more.</p>
+      <p>We combine local expertise with a global outlook, ensuring both employers and job seekers benefit from a transparent, efficient, and people-first approach. Whether it's permanent recruitment, bulk hiring, or leadership roles, we provide tailored solutions with measurable results.</p>
     </div>
-  </section>
-
-  <section id="why">
-    <h2>Why Partner with Us?</h2>
-    <p>Craft Career stands out by delivering measurable value and peace of mind to every client.</p>
-    <ul style="list-style:none; margin-top:2rem; text-align:left; max-width:800px; margin:auto;">
-      <li>✔ Pre-screened, quality candidates that save you time.</li>
-      <li>✔ Affordable recruitment packages for startups, SMEs, and enterprises.</li>
-      <li>✔ Dedicated account managers ensuring smooth communication.</li>
-      <li>✔ Swift closures that minimize productivity gaps.</li>
-      <li>✔ PAN India reach so you never miss top talent anywhere.</li>
-    </ul>
-    <img src="https://images.unsplash.com/photo-1556740772-1a741367b93e?auto=format&fit=crop&w=1200&q=80" alt="Business team success celebration">
-  </section>
-
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>Let’s build the workforce of tomorrow together. Whether you’re an employer searching for the perfect candidate or a professional seeking growth, Craft Career is here for you.</p>
-    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="Professional handshake">
-    <div class="cta">
-      <a href="mailto:info@craftcareer.com">Email Us</a>
+    <div class="about-image" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Modern office environment with professionals collaborating" />
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <p>&copy; 2025 Craft Career. All rights reserved.</p>
-    <p>Follow us on social media for updates.</p>
-  </footer>
+<section id="services" aria-label="Services offered by Craft Career">
+  <h2 class="section-title">Our Services</h2>
+  <div class="container services-grid">
+    <div class="service-card" role="region" aria-labelledby="service1-title">
+      <h3 id="service1-title">Executive Search</h3>
+      <p>Helping organizations hire visionary leaders and senior executives who can drive long-term growth and strategy.</p>
+    </div>
+    <div class="service-card" role="region" aria-labelledby="service2-title">
+      <h3 id="service2-title">Talent Acquisition</h3>
+      <p>Providing end-to-end recruitment solutions for mid- and entry-level roles across industries with speed, accuracy, and cultural fit.</p>
+    </div>
+    <div class="service-card" role="region" aria-labelledby="service3-title">
+      <h3 id="service3-title">Campus Recruitment</h3>
+      <p>Partnering with colleges and universities to connect fresh graduates with India's top employers through campus drives and internship programs.</p>
+    </div>
+    <div class="service-card" role="region" aria-labelledby="service4-title">
+      <h3 id="service4-title">Temporary & Contract Staffing</h3>
+      <p>Flexible workforce solutions designed to meet seasonal demand, project-based requirements, or specialized skills.</p>
+    </div>
+    <div class="service-card" role="region" aria-labelledby="service5-title">
+      <h3 id="service5-title">Career Guidance & Counseling</h3>
+      <p>Guiding professionals in India to make informed career choices, enhance employability, and achieve growth in competitive job markets.</p>
+    </div>
+  </div>
+</section>
 
-  <script>
-    // Scroll animation effect
-    const sections = document.querySelectorAll('section');
-    const revealOnScroll = () => {
-      sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if(rect.top < window.innerHeight - 100){
-          section.classList.add('visible');
+<section id="why-us" aria-label="Why choose Craft Career">
+  <div class="container why-us-content">
+    <div class="why-us-text">
+      <h2>Why Choose Us?</h2>
+      <p>We are more than recruiters — we are career builders and growth partners. Our strength lies in a deep understanding of India's evolving job market, strong industry networks, and personalized service.</p>
+      <p>By choosing Craft Career, you gain:</p>
+      <ul class="benefits-list">
+        <li>Proven expertise in multiple Indian industries (IT, BFSI, Healthcare, FMCG, and more)</li>
+        <li>Pan-India recruitment network covering metros, tier-2, and tier-3 cities</li>
+        <li>Quick turnaround time with large candidate database and AI-powered screening tools</li>
+        <li>End-to-end support from job posting to onboarding</li>
+        <li>Commitment to ethical practices and transparent processes</li>
+      </ul>
+      <p>Our mission is simple: to connect the right talent with the right opportunity.</p>
+    </div>
+    <div class="why-us-image" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Career growth and professional development" />
+    </div>
+  </div>
+</section>
+
+<section id="contact" aria-label="Contact Craft Career">
+  <div class="container">
+    <h2>Looking to hire the best talent or find your dream job in India? Let's make it happen together.</h2>
+    <p>Email Us: <a href="mailto:info@craftcareer.com">info@craftcareer.com</a></p>
+    <p>Call Us: <a href="tel:+919876543210">+91-9876543210</a></p>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <p>© 2025 Craft Career. All rights reserved.</p>
+  <p>Follow us on LinkedIn, Twitter, and Facebook for updates.</p>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const header = document.querySelector('header.header');
+
+    // Toggle mobile menu
+    mobileMenuToggle.addEventListener('click', function () {
+      navMenu.classList.toggle('active');
+      mobileMenuToggle.classList.toggle('active');
+      document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+    });
+
+    // Close menu on nav link click
+    navLinks.forEach(link => {
+      link.addEventListener('click', function () {
+        navMenu.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      });
+    });
+
+    // Smooth scrolling for anchor links
+    navLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            const headerHeight = header.offsetHeight;
+            const top = target.offsetTop - headerHeight - 20;
+            window.scrollTo({ top: top > 0 ? top : 0, behavior: 'smooth' });
+          }
         }
       });
-    };
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll);
-  </script>
+    });
+
+    // Header background toggle on scroll
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  });
+</script>
 </body>
 </html>
